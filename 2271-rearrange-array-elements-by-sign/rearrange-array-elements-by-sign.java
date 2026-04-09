@@ -1,18 +1,26 @@
+import java.util.*;
+
 class Solution {
     public int[] rearrangeArray(int[] nums) {
-        List<Integer> pos = new ArrayList<>();
-        List<Integer> neg = new ArrayList<>();
+        int n = nums.length;
 
-        for (int num : nums) {
-            if (num > 0) pos.add(num);
-            else neg.add(num);
+        // Result array
+        int[] ans = new int[n];
+
+        // Even index → positive, Odd index → negative
+        int posIndex = 0, negIndex = 1;
+
+        // Traverse array
+        for (int i = 0; i < n; i++) {
+            if (nums[i] < 0) {
+                ans[negIndex] = nums[i];
+                negIndex += 2;
+            } else {
+                ans[posIndex] = nums[i];
+                posIndex += 2;
+            }
         }
 
-        for (int i = 0; i < nums.length / 2; i++) {
-            nums[2 * i] = pos.get(i);
-            nums[2 * i + 1] = neg.get(i);
-        }
-
-        return nums;
+        return ans;
     }
 }
