@@ -8,32 +8,41 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        int count = 0;
-        ListNode temp = head;
+        // Create a dummy node before head to handle edge cases
+        // (e.g., removing the head itself)
+        ListNode dummy = new ListNode(0, head);
 
-        while (temp != null) {
-            count++;
-            temp = temp.next;
+        // Initialize slow and fast pointers at dummy
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+
+        // Move fast pointer n+1 steps ahead to create a gap of n nodes
+        for (int i = 0; i <= n; i++) {
+            fast = fast.next;
         }
 
-        if (count == n) {
-            return head.next;
+        // Move both pointers together until fast reaches the end
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
         }
 
-        int res = count - n;
-        temp = head;  // reset temp back to head
+        // slow is now at the node just BEFORE the target → delete target node
+        slow.next = slow.next.next;
 
-        while (temp != null) {
-            res--;
-            if (res == 0) {
-                temp.next = temp.next.next;  // delete the target node
-                break;
-            }
-            temp = temp.next;  // only move forward if we haven't reached the spot yet
-        }
-
-        return head;
+        // Return updated head (dummy.next in case the real head was removed)
+        return dummy.next;
     }
 }
