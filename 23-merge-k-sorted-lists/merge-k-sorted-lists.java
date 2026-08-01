@@ -42,6 +42,6 @@ class Solution {
             }
         }
 
-        return head;  // this was missing!
+        return head;  
     }
 }
