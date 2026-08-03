@@ -1,13 +1,20 @@
 class Solution {
     public boolean isValid(String s) {
-        int prevLength;
-        do {
-            prevLength = s.length();        // ❌ was == (comparison), should be = (assignment)
-            s = s.replace("()", "");
-            s = s.replace("{}", "");
-            s = s.replace("[]", "");
-        } while (s.length() != prevLength); // ❌ was prevLength() — it's a variable, not a function
+        Stack<Character> stack = new Stack<>(); 
 
-        return s.isEmpty();                 // ❌ was s.isEmpty (missing parentheses)
-    }                                        // ❌ closing brace was in wrong place (return was outside method)
+        for(char c : s.toCharArray()){
+            if(c == '(' || c == '{' || c == '[' ){
+                stack.push(c);
+            }
+            else{
+                if(stack.isEmpty()) return false;
+
+                char top = stack.pop();
+                if(c == ')' && top != '(') return false;
+                if(c == ']' && top != '[') return false;
+                if(c == '}' && top != '{') return false;
+            }
+        }
+        return stack.isEmpty();
+    }
 }
