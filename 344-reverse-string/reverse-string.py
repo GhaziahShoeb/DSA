@@ -3,7 +3,9 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        reversed_copy = s[::-1]
-        for i in range(len(s)):
-            s[i] = reversed_copy[i]
-        
+        left = 0
+        right = len(s) - 1
+        while right > left:
+            s[left] ,s[right] = s[right] , s[left]
+            left += 1
+            right-= 1
