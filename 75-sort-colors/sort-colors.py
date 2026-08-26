@@ -3,12 +3,18 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        freq = {}
-        for x in nums:
-            if x in freq:
-                freq[x] += 1
-            else:
-                freq[x] = 1
-        nums[:]= [0] * freq.get(0,0)+ [1] * freq.get(1,0) +[2] * freq.get(2,0)
+        count_0 = 0
+        count_1 = 0
+        count_2 = 0
 
-        
+        for x in nums :
+            if x == 0:
+                count_0 += 1
+            elif x == 1:
+                count_1 += 1
+            else :
+                count_2 += 1
+
+        nums[:] = [0] * count_0 + [1] * count_1 + [2] * count_2
+            
+
