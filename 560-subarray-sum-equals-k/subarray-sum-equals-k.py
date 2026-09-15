@@ -5,11 +5,10 @@ class Solution:
         result = 0
 
         for num in nums:
-            running_sum = running_sum + num
+            running_sum += num
 
-            if (running_sum - k) in count : 
-                result = result + count[running_sum - k]
+            if (running_sum - k) in count:
+                result += count[running_sum  - k]
 
-            count[running_sum] = count.get(running_sum , 0) + 1
+            count[running_sum ] = count.get(running_sum , 0) + 1
         return result
-        
