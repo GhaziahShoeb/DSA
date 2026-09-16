@@ -5,6 +5,7 @@ class Solution:
 
         if row_idx != -1:
             return self.binarySearchOverRow(row_idx, matrix, target)
+
         else:
             return False
 
@@ -17,11 +18,10 @@ class Solution:
 
             mid = low + (high - low) // 2
 
-            # Is target inside this row's range?
             if matrix[mid][0] <= target <= matrix[mid][-1]:
                 return mid
 
-            elif matrix[mid][0] < target:
+            elif matrix[mid][0] <= target:
                 low = mid + 1
 
             else:
@@ -48,3 +48,5 @@ class Solution:
                 low = mid + 1
 
         return False
+
+        
