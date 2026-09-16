@@ -1,52 +1,26 @@
 class Solution:
     def searchMatrix(self, matrix: list[list[int]], target: int) -> bool:
 
-        row_idx = self.searchPotentialRow(matrix, target)
+        rows = len(matrix)
+        cols = len(matrix[0])
 
-        if row_idx != -1:
-            return self.binarySearchOverRow(row_idx, matrix, target)
+        left = 0
+        right = rows * cols - 1
 
-        else:
-            return False
+        while left <= right:
 
-    def searchPotentialRow(self, matrix, target):
+            mid = left + (right - left) // 2
 
-        low = 0
-        high = len(matrix) - 1
+            row = mid // cols
+            col = mid % cols
 
-        while low <= high:
-
-            mid = low + (high - low) // 2
-
-            if matrix[mid][0] <= target <= matrix[mid][-1]:
-                return mid
-
-            elif matrix[mid][0] <= target:
-                low = mid + 1
-
-            else:
-                high = mid - 1
-
-        return -1
-
-    def binarySearchOverRow(self, row_idx, matrix, target):
-
-        low = 0
-        high = len(matrix[row_idx]) - 1
-
-        while low <= high:
-
-            mid = low + (high - low) // 2
-
-            if matrix[row_idx][mid] == target:
+            if matrix[row][col] == target:
                 return True
 
-            elif matrix[row_idx][mid] > target:
-                high = mid - 1
+            elif matrix[row][col] < target:
+                left = mid + 1
 
             else:
-                low = mid + 1
+                right = mid - 1
 
         return False
-
-        
