@@ -4,14 +4,13 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque
-
 class Solution:
     def zigzagLevelOrder(self, root: TreeNode | None) -> list[list[int]]:
         if root is None:
             return []
-        result = []
+
         queue = deque([root])
+        result = []
 
         while queue:
             level_size = len(queue)
@@ -26,11 +25,9 @@ class Solution:
                 if node.right:
                     queue.append(node.right)
 
-            # moved OUTSIDE the for loop — runs once per level, after level is fully built
-            if len(result) % 2 != 0:
+            if len(result) % 2 != 0 :
                 level.reverse()
-
             result.append(level)
 
         return result
-        
+    
