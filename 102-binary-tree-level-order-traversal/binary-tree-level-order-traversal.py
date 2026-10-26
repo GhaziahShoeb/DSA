@@ -4,14 +4,14 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque
 class Solution:
     def levelOrder(self, root: TreeNode | None) -> list[list[int]]:
         if root is None:
             return []
-        result = []
-        queue = deque([root])
 
+        queue = deque([root])
+        result = []
+        
         while queue:
             level_size = len(queue)
             level = []
@@ -25,3 +25,6 @@ class Solution:
                     queue.append(node.right)
             result.append(level)
         return result
+
+
+        
